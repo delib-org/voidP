@@ -1,25 +1,4 @@
-class MO {
-    constructor(output, id, input1, input2, signal = 0) {
-        this.output = output;
-        this.id = id;
-        this.input1 = input1;
-        this.input2 = input2;
-        this.signal = signal
-    }
-
-    fnSignalAccumulate(sig) {
-        console.log(`For ${this.id}, has ${this.signal}, and ${sig} will be added`)
-        this.signal += sig;
-        console.log(`Now ${this.id}, has ${this.signal}`)
-    }
-
-    fnPropogate(){
-        if(this.output !== null){
-            return this.input1 + this.input2;
-        }
-    }
-
-}
+const MO = require('./model/mo');
 
 const input = [1, 0, 1, 1];
 const inputMOLayer = [];
@@ -66,16 +45,15 @@ layers[0].map((mo, index)=>{
 //teach the network
 console.log('start learning')
 layers.map((layer, index) => {
-    console.log(`layer ${index}`)
+    
     //go over the layer and send inputs if input is 1
     layer.map((mo, index2) => {
-     
-        if (mo.output !== null) {
-            layers[mo.output.layer][mo.output.position].fnSignalAccumulate(mo.signal * .4534545)
+       
+        if (mo.fnPropogate() !== false) {
+            layers[mo.output.layer][mo.output.position].fnSignalAccumulate(mo.fnPropogate())
         }
     })
     
 })
-
 
 console.log(layers)
