@@ -5,6 +5,7 @@ class MO {
         this.input1 = input1;
         this.input2 = input2;
         this.signal = signal
+        this.cutoff = 1
     }
 
     fnSignalAccumulate(sig) {
@@ -15,9 +16,16 @@ class MO {
 
     fnPropogate(){
         if(this.output !== null){
-            return this.input1 + this.input2;
+           
+            console.log(`For ${this.id} the comb signal is ${this.signal}`)
+            if(this.signal>this.cutoff){
+                return this.signal;
+            }else {
+                return this.signal/2 ;
+            }
+            
         } else {
-            return false
+            return 0
         }
     }
 

@@ -1,6 +1,6 @@
 const MO = require('./model/mo');
 
-const input = [1, 0, 1, 1];
+const input = [1, 0, 0, 0,0,1,1,1,1,1,1,1,1,1,1];
 const inputMOLayer = [];
 
 let layers = [];
@@ -49,7 +49,8 @@ layers.map((layer, index) => {
     //go over the layer and send inputs if input is 1
     layer.map((mo, index2) => {
        
-        if (mo.fnPropogate() !== false) {
+        if (mo.fnPropogate() !== 0) {
+            console.log(`Propogate to ${mo.output.layer}-${mo.output.position}`)
             layers[mo.output.layer][mo.output.position].fnSignalAccumulate(mo.fnPropogate())
         }
     })
