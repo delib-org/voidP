@@ -8,7 +8,7 @@ class MO {
 
 }
 
-const input = [1, 0, 0, 1, 1, 1, 0, 1];
+const input = [1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0];
 const inputMOLayer = [];
 
 
@@ -34,14 +34,14 @@ while (layers[counter].length > 2) {
     while (counterLoop < layers[counter].length) {
         //get a couple and pair them
         let couple = layers[counter].slice(counterLoop, counterLoop + 2);
+        if (couple.length === 2) {
 
+            couple[0].output = `${counter + 1}-${counterLoop/2}`;
+            couple[1].output = `${counter + 1}-${counterLoop/2}`;
+            layers[counter + 1].push(new MO(null, `${counter + 1}-${counterLoop/2}`, couple[0].id, couple[1].id));
 
-        couple[0].output = `${counter}-${counterLoop}`;
-        couple[1].output = `${counter}-${counterLoop}`;
-        layers[counter + 1].push(new MO(null, `${counter+1}-${counterLoop}`, couple[0].id, couple[1].id));
-
-        counterLoop += 2;
-
+            counterLoop += 2;
+        }
     }
     counter++;
     console.log(layers)
