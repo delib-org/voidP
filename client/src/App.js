@@ -1,8 +1,19 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+//functions
+import {runSON} from './functions/base';
+
 function App() {
+
+  useEffect(() => {
+    runSON()
+    return () => {
+      
+    };
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
