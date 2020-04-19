@@ -1,10 +1,10 @@
-import MO from '../model/mo'
+// import MO from '../model/mo'
 
-export function runSON() {
-    const ns = {};
-    ns[0] = new MO(1, 0, [], [], 0);
-    ns[1] = new MO(2, 1, [], [0], 1);
-    ns[2] = new MO(3, 1, [], [0], 1);
+export function runSON(ns) {
+    // const ns = {};
+    // ns[0] = new MO(0, 0, [], 0);
+    // ns[1] = new MO(1, 1, [0], 1);
+    // ns[2] = new MO(2, 1, [0], 1);
 
     Object.entries(ns).forEach(n => {
         console.log(n[0], n[1])
@@ -15,22 +15,30 @@ export function runSON() {
     // let newCycle = true;
     for (let i = maxLayer; i >= 0; i--) {
 
+       
+
         let neuronsInLayer = Object.entries(ns).filter(neuron => neuron[1].layer === i);
 
+        //get all neurons in output layer
+        const targetNurons = new Set();
         //fire from upper to lower
         neuronsInLayer.forEach(neuron => {
 
-
-            const targetNurons = neuron[1].outputs;
+           
+            neuron[1].outputs.forEach(outputId=>{
+                targetNurons.add(outputId)
+                ns[outputId].accumlateCurrent({id:neuron[1].id, current:neuron[1].outputCurrent})
+            })
+            
 
             //fire from the neurom to each of the target neurons
-            targetNurons.forEach(targetNeuronId => {
-                
-                ns[targetNeuronId].accumlateCurrent(neuron[1].current, neuron[1].id);
-                // if (newCycle === true){newCycle = false};
-                console.log(`Target Neuron ${targetNeuronId} got current ${neuron[1].outputCurrent} from ${neuron[1].id}`)
-            })
+            
 
+        })
+
+        targetNurons.forEach(tragetNuronId=>{
+         
+            ns[tragetNuronId].calculateInputs();
         })
     }
     console.log(ns)

@@ -5,10 +5,23 @@ import './App.css';
 //functions
 import {runSON} from './functions/base';
 
-function App() {
+//model
+import MO from './model/mo';
 
+//initiate network
+
+
+
+function App() {
+  const ns = {};
   useEffect(() => {
-    runSON()
+
+    
+    ns[0] = new MO(0, 0, [], 0);
+    ns[1] = new MO(1, 1, [0], 1);
+    ns[2] = new MO(2, 1, [0], 1);
+
+    runSON(ns)
     return () => {
       
     };
@@ -18,9 +31,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <button onClick={()=>{runSON(ns)}}>Run Learinig cycle</button>
         <a
           className="App-link"
           href="https://reactjs.org"

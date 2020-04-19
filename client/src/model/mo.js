@@ -1,41 +1,70 @@
 class MO {
-    constructor(id, layer, inputs, outputs, inputCurrent = 0, outputCurrent = 0) {
+    constructor(id, layer, outputs ,outputCurrent = 0) {
         this.id = id;
         this.layer = layer;
-        this.inputs = new Set(inputs);
+        this.inputs = {};
 
         this.outputs = outputs;
 
+
+        this.newCycle = false;
+
+        this.sumCurrents = 0;
         this.trashold = .8;
+        this.cycleInputs = [];
         this.potentiations = new Set();
-        this.inputCurrent = inputCurrent;
-        if (inputCurrent > this.trashold) {
-            this.outputCurrent = this.inputCurrent;
-        } else{
-            this.outputCurrent = 0;
-        }
+        this.inputCurrents = []
+        this.outputCurrent = outputCurrent;
+        
     }
 
-    accumlateCurrent(newCurrent, input) {
-        this.inputCurrent += newCurrent
+    set setNewCycle(go) {
+        this.newCycle = true;
+    }
 
-        //limit max current to 1
-        if (this.inputCurrent > 1) this.inputCurrent = 1;
+    set setEndCycle(go) {
+        this.newCycle = false;
+    }
 
-        // if (isNewCycle) this.inputs.clear()
+    accumlateCurrent(input) {
 
-        if (newCurrent > this.trashold) {
-            this.inputs.add(input)
-            
+
+        //add all inputs with more then trashold
+        if (input.current > this.trashold) {
+
+
+            if (!{}.hasOwnProperty.call(this.inputs, input.id)) {
+                this.inputs[input.id] = { synapticStrength: 0.1 }
+
+                //mark inputs that has more strength in this cycle
+                this.cycleInputs.push(input.id)
+            }
+
+            this.sumCurrents += (input.current * this.inputs[input.id].synapticStrength)
         }
 
-        if (this.inputCurrent > this.trashold) {
-            this.outputCurrent = 1;
-            this.inputs.forEach(input => {
-                this.potentiations.add(input)
+    }
+
+    calculateInputs() {
+        this.outputCurrent = 0;
+
+        
+
+        if (this.sumCurrents >= this.trashold) {
+
+            //make the comming synapsis stronger
+            this.cycleInputs.forEach(inputId => {
+                this.inputs[inputId].synapticStrength += 0.1;
             })
+
+            this.outputCurrent = 1;
         }
+        //empty array of inputs and clear sumCurrent for a new cycle
+        this.cycleInputs = [];
+        this.sumCurrents = 0;
     }
+
+
 }
 
 export default MO;
