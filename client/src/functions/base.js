@@ -1,10 +1,7 @@
 // import MO from '../model/mo'
 
 export function runSON(ns) {
-    // const ns = {};
-    // ns[0] = new MO(0, 0, [], 0);
-    // ns[1] = new MO(1, 1, [0], 1);
-    // ns[2] = new MO(2, 1, [0], 1);
+   
 
     Object.entries(ns).forEach(n => {
         console.log(n[0], n[1])

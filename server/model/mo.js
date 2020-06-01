@@ -1,34 +1,54 @@
+const {makeId} = require('../functions/general');
+
 class MO {
-    constructor(output, id, input1, input2, signal = 0) {
-        this.output = output;
-        this.id = id;
-        this.input1 = input1;
-        this.input2 = input2;
-        this.signal = signal
-        this.cutoff = 1
+    constructor() {
+        
+        this.id = makeId(2);
+       
+        this.targets = new Set();
+        this.sources = new Set();
     }
 
-    fnSignalAccumulate(sig) {
-        console.log(`For ${this.id}, has ${this.signal}, and ${sig} will be added`)
-        this.signal += sig;
-        console.log(`Now ${this.id}, has ${this.signal}`)
-    }
-
-    fnPropogate(){
-        if(this.output !== null){
-           
-            console.log(`For ${this.id} the comb signal is ${this.signal}`)
-            if(this.signal>this.cutoff){
-                return this.signal;
-            }else {
-                return this.signal/2 ;
+    addTargets(targets) {
+        try {
+            if (Array.isArray(targets)) {
+                targets.forEach(target => this.addTarget(target))
+            } else {
+                this.addTarget(targets)
             }
-            
-        } else {
-            return 0
+        } catch (err) {
+            console.error(`Error at addTargets ${this.id}`)
+            console.error(err)
         }
+
     }
+    addTarget(target){
+        this.targets.add(target.id)
+    }
+    removeTargets(targets){
+        try {
+            if (Array.isArray(targets)) {
+                targets.forEach(target => this.targets.delete(target))
+            } else {
+                this.targets.delete(targets)
+            }
+        } catch (err) {
+            console.error(`Error at removeTargets ${this.id}`)
+            console.error(err)
+        }
+
+    }
+
+    addSource(sourceId){
+        this.sources.add(sourceId)
+    }
+
+    
+
+    
+
+    
 
 }
 
-module.exports= MO
+module.exports = MO

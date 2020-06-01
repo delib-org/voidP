@@ -1,0 +1,125 @@
+{
+    "mosId": {},
+    "mos": [
+        {
+            "id": "a",
+            "targets": {},
+            "sources": {}
+        },
+        {
+            "id": "b",
+            "targets": {},
+            "sources": {}
+        },
+        {
+            "id": "c",
+            "targets": {},
+            "sources": {}
+        },
+        {
+            "id": "d",
+            "targets": {},
+            "sources": {}
+        },
+        {
+            "id": "e",
+            "targets": {},
+            "sources": {}
+        },
+        {
+            "id": "f",
+            "targets": {},
+            "sources": {}
+        },
+        {
+            "id": "g",
+            "targets": {},
+            "sources": {}
+        },
+        {
+            "id": "h",
+            "targets": {},
+            "sources": {}
+        },
+        {
+            "id": "i",
+            "targets": {},
+            "sources": {}
+        },
+        {
+            "id": "j",
+            "targets": {},
+            "sources": {}
+        }
+    ],
+    "mosIndex": {
+        "MQ": 0,
+        "X7": 1,
+        "RI": 2,
+        "A9": 3,
+        "dE": 4,
+        "MT": 5,
+        "sK": 6,
+        "Tx": 7,
+        "jZ": 8,
+        "UC": 9
+    },
+    "layers": [
+        [
+            {
+                "id": "MQ",
+                "targets": {},
+                "sources": {}
+            },
+            {
+                "id": "X7",
+                "targets": {},
+                "sources": {}
+            },
+            {
+                "id": "RI",
+                "targets": {},
+                "sources": {}
+            }
+        ],
+        [
+            {
+                "id": "A9",
+                "targets": {},
+                "sources": {}
+            },
+            {
+                "id": "dE",
+                "targets": {},
+                "sources": {}
+            },
+            {
+                "id": "MT",
+                "targets": {},
+                "sources": {}
+            }
+        ],
+        [
+            {
+                "id": "sK",
+                "targets": {},
+                "sources": {}
+            },
+            {
+                "id": "Tx",
+                "targets": {},
+                "sources": {}
+            },
+            {
+                "id": "jZ",
+                "targets": {},
+                "sources": {}
+            },
+            {
+                "id": "UC",
+                "targets": {},
+                "sources": {}
+            }
+        ]
+    ]
+}
